@@ -73,7 +73,7 @@
                                 <div class="socail_links">
                                     <ul>
                                         <li>
-                                            <a href="#">
+                                            <a href="https://www.facebook.com/puriclub.in/">
                                                 <i class="fa fa-facebook-square"></i>
                                             </a>
                                         </li>
@@ -90,7 +90,7 @@
                                     </ul>
                                 </div>
                                 <div class="book_btn d-none d-lg-block">
-                                    <a class="popup-with-form" href="#test-form">Book A Room</a>
+                                    <a  href="contact.html">Book A Room</a>
                                 </div>
                             </div>
                         </div>
@@ -764,7 +764,20 @@
 
 	 <!--Start Table-->
 		<br>  
-	 <table class="table table-bordered">
+
+		<table class="table table-bordered">
+			<tr style="background: #0854964d;">
+				<th scope="col">Members Id</th>
+				<th scope="col">Name</th>
+				<th scope="col">Image</th>
+				<!-- <th scope="col">Phone No</th>
+				<th scope="col">Address</th> -->
+			  </tr>
+			  <tbody id="members">
+				
+				</tbody>  
+		</table>
+	 <!-- <table class="table table-bordered">
 		<thead>
 		  <tr style="background: #0854964d;">
 			<th scope="col">Members Id</th>
@@ -3382,13 +3395,14 @@
 				HEMANT BASU SARANI,700001</td>
 		  </tr>
 		</tbody>
-	  </table>
+	  </table> -->
+
 
 	 <!--End Table-->
 
 
     <!-- footer -->
-    <footer class="footer" >
+	<footer class="footer" >
         <div class="footer_top">
             <div class="container">
                 <div class="row">
@@ -3397,18 +3411,18 @@
                             <h3 class="footer_title">
                                 address
                             </h3>
-                            <p class="footer_text" >  200, Green road, Mongla, <br>
-                                    New Yor City USA</p>
+                            <p class="footer_text"> Puri Club,Raj Bhawan Road,Puri <br>
+                                Odisha,India-752001</p>
                             <a href="#" class="line-button">Get Direction</a>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6 col-lg-3">
                         <div class="footer_widget">
                             <h3 class="footer_title">
-                                    Reservation
+                                Reservation
                             </h3>
-                            <p class="footer_text" >+10 367 267 2678 <br>
-                                    reservation@montana.com</p>
+                            <p class="footer_text">06752 255567/9437553567 <br>
+                                puriclub@gmail.com</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-6 col-lg-2">
@@ -3445,9 +3459,9 @@
                 <div class="row">
                     <div class="col-xl-8 col-md-7 col-lg-9">
                         <p class="copy_right">
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                <!-- Link back to puriclub can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://puriclub.com" target="_blank">puriclub</a>
+<!-- Link back to puriclub can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
                     <div class="col-xl-4 col-md-5 col-lg-3">
@@ -3566,6 +3580,42 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
              rightIcon: '<span class="fa fa-caret-down"></span>'
          }
 
+        });
+		$.ajax({
+            url: '/member.json',
+            type: 'get',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+			  console.log(JSON.stringify(data));
+			  var student = ''; 
+  
+                        // ITERATING THROUGH OBJECTS 
+                        $.each(data, function (key, value) { 
+  
+                            //CONSTRUCTION OF ROWS HAVING 
+                            // DATA FROM JSON OBJECT 
+                            student += '<tr>'; 
+                            student += '<td>' +  
+                                value.member_id + '</td>'; 
+  
+                            student += '<td>' +  
+                                value.name + '</td>'; 
+  
+                            student += '<td><img src="' +  
+                                value.image + '" style="border: 1px solid #ddd;padding: 5px;width: 125px;"></td>'; 
+  
+                            // student += '<td>' +  
+                            //     value.phone_no + '</td>'; 
+							// student += '<td>' +  
+                            //     value.address + '</td>'; 
+                            // student += '</tr>'; 
+                        }); 
+                          
+                        //INSERTING ROWS INTO TABLE  
+                        $('#members').append(student); 
+            }
+           
         });
     </script>
 
